@@ -19,23 +19,9 @@
 
 ## 2. 시스템 아키텍처
 
-```mermaid
-flowchart LR
-    User["사용자"] -->|"조회 요청"| Frontend["Frontend<br/>Vue.js"]
-    Frontend -->|"API 요청"| Backend["Backend<br/>Node.js / Express"]
-    Backend -->|"사용자 데이터 조회"| MariaDB[("MariaDB")]
-    Backend -->|"로그 데이터 조회"| PostgreSQL[("PostgreSQL")]
-    Backend -->|"가공된 분석 데이터 응답"| Frontend
-    Frontend -->|"대시보드 시각화"| User
-```
+![자동화 테스트 웹 모니터링 시스템 아키텍처](./automated-test-monitoring/architecture.png)
 
-### 아키텍처 설명
-
-| 영역 | 기술 | 역할 |
-| --- | --- | --- |
-| Frontend | Vue.js | 테스트 결과 및 로그 데이터 시각화, 사용자 입력 조건 기반 조회 요청 |
-| Backend | Node.js, Express | 로그 데이터 조회, 통계 계산, 응답 데이터 가공, API 제공 |
-| Database | MariaDB, PostgreSQL | 사용자 데이터, 테스트 결과, 로그 데이터 저장 |
+사용자는 Vue.js 기반 프론트엔드에서 조회 조건을 입력하고, 백엔드는 Node.js/Express 기반 API를 통해 사용자 데이터와 로그 데이터를 조회합니다. MariaDB는 사용자 정보와 테스트 결과 등 정형 데이터를 관리하고, PostgreSQL은 로그 데이터와 통계/분석용 데이터를 관리합니다.
 
 ## 3. 데이터 처리 흐름
 
@@ -45,12 +31,27 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    Request["조회 조건 입력"] --> SQL["조건 기반 SQL 조회"]
-    SQL --> Raw["raw 로그 데이터 수신"]
-    Raw --> DataFrame["danfo.js DataFrame 변환"]
-    DataFrame --> Aggregate["집계 및 통계 처리"]
-    Aggregate --> Response["차트/분석용 응답 데이터 생성"]
-    Response --> Dashboard["대시보드 시각화"]
+
+    subgraph A["1. 데이터 조회"]
+        A1["조회 조건 입력"]
+        A2["조건 기반 로그 조회"]
+        A3["raw 로그 데이터 수신"]
+    end
+
+    subgraph B["2. 데이터 가공"]
+        B1["danfo.js DataFrame 변환"]
+    end
+
+    subgraph C["3. 분석 및 집계"]
+        C1["집계 / 통계 처리"]
+    end
+
+    subgraph D["4. 응답 및 시각화"]
+        D1["차트 응답 데이터 생성"]
+        D2["대시보드 시각화"]
+    end
+
+    A1 --> A2 --> A3 --> B1 --> C1 --> D1 --> D2
 ```
 
 ### 처리 단계 요약
