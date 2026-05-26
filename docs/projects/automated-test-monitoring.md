@@ -30,22 +30,28 @@
 ### 처리 흐름
 
 ```mermaid
-flowchart TB
-    subgraph R1[" "]
-        direction LR
-        A["조회 조건 입력<br>프로젝트 / 시나리오 / 기간"] --> B["SQL 조건 조회<br>필요 로그 데이터 선별"] --> C["raw 로그 데이터 수신"]
+flowchart LR
+
+    subgraph A["1. 데이터 조회"]
+        A1["조회 조건 입력"]
+        A2["조건 기반 로그 조회"]
+        A3["raw 로그 데이터 수신"]
     end
 
-    subgraph R2[" "]
-        direction RL
-        D["danfo.js DataFrame 변환"] --> E["통계 집계<br>실행 시간 / 성공·실패 / 오류 유형"] --> F["대시보드 응답 생성<br>차트용 데이터 구조"]
+    subgraph B["2. 데이터 가공"]
+        B1["danfo.js DataFrame 변환"]
     end
 
-    C --> D
-    F --> G["프론트엔드 시각화"]
+    subgraph C["3. 분석 및 집계"]
+        C1["집계 / 통계 처리"]
+    end
 
-    style R1 fill:transparent,stroke:transparent
-    style R2 fill:transparent,stroke:transparent
+    subgraph D["4. 응답 및 시각화"]
+        D1["차트 응답 데이터 생성"]
+        D2["대시보드 시각화"]
+    end
+
+    A1 --> A2 --> A3 --> B1 --> C1 --> D1 --> D2
 ```
 
 ### 처리 단계 요약
