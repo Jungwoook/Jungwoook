@@ -20,6 +20,7 @@
 
 eGovFrame과 Spring Boot 간 코드 변환을 자동화하고, 변환 상태와 결과 파일을 관리하는 웹 플랫폼입니다.
 
+- [상세 보기](./docs/projects/ai-framework-conversion-platform.md)
 - [포트폴리오에서 보기](./docs/portfolio.md)
 
 ## Links

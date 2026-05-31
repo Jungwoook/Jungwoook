@@ -31,7 +31,7 @@ eGovFrame과 Spring Boot 간 코드 변환을 자동화하고, 변환 진행 상
 - **기간**: 2025.06 ~ 2025.09
 - **역할**: 백엔드 개발
 - **핵심 키워드**: Spring Boot, SSE, AWS S3, Presigned URL, MySQL/MongoDB 분리
-- **상세 문서**: 작성 예정
+- **상세 문서**: [AI 기반 프레임워크 변환 플랫폼](./projects/ai-framework-conversion-platform.md)
 
 ## 개인 프로젝트
 
