@@ -26,6 +26,7 @@ eGovFrame과 Spring Boot 간 코드 변환을 자동화하고, 변환 상태와 
 
 - [Portfolio](./docs/portfolio.md)
 - [Resume](./docs/resume.md)
+- [AI를 활용하는 개발에 대한 생각](./docs/ai-development-thoughts.md)
 
 ## Contact
 
